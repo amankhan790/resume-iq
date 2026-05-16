@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
 import "./index.css";
 import Resume from "./pages/Resume";
-import { Home } from "lucide-react";
 import LandingPage from "./pages/LandingPage";
+import Upload from "./pages/Upload";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +12,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/upload",
+        element: <Upload />,
       },
       {
         path: "resume",
