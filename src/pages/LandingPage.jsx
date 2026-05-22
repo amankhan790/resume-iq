@@ -24,13 +24,13 @@ const LandingPage = () => {
             signUpFallbackRedirectUrl="/upload"
             fallbackRedirectUrl="/upload"
           >
-            <Button className="mt-10 bg-green-500 text-white border-none hover:bg-green-600">
+            <Button className="mt-10 text-lg bg-green-500 text-white border-none hover:bg-green-600 cursor-pointer font-bold px-8 py-5">
               Get Started
             </Button>
           </SignInButton>
         ) : (
           <Link to="/upload">
-            <Button className="mt-10 bg-green-500 text-white border-none hover:bg-green-600">
+            <Button className="mt-10 text-lg bg-green-500 text-white border-none hover:bg-green-600 cursor-pointer font-bold px-8 py-5">
               Upload Now
             </Button>
           </Link>

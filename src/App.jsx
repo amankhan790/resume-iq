@@ -4,6 +4,7 @@ import "./index.css";
 import Resume from "./pages/Resume";
 import LandingPage from "./pages/LandingPage";
 import Upload from "./pages/Upload";
+import TaskList from "./components/TaskList";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "resume",
         element: <Resume />,
+      },
+      {
+        path: "/tasks",
+        element: <TaskList />,
       },
     ],
   },
