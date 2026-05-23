@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <Upload />,
       },
       {
-        path: "resume",
+        path: "/resume/:id",
         element: <Resume />,
       },
       {

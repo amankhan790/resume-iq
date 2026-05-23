@@ -104,13 +104,14 @@ const ResumeUploadForm = () => {
       // 4. save everything to Supabase
       setStatus("Saving results...");
       const saved = await uploadResume(supabase, {
+        userId: user.id,
         fileName: data.resume.name,
         resumeText,
         jobTitle: data.jobTitle,
         jobDescription: data.jobDescription,
         companyName: data.companyName,
         score: feedback.score,
-        feedback, // full JSON saved in jsonb column
+        feedback,
       });
 
       // 5. redirect to results page
