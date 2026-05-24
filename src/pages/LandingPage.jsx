@@ -10,7 +10,7 @@ const LandingPage = () => {
   return (
     <section className="pt-28 lg:pt-32 text-center">
       <div className="py-16">
-        <h1 className="text-6xl text-center font-bold ">
+        <h1 className="lg:text-6xl text-5xl text-center font-bold">
           Track Your Applications <br /> & Resumem Rating
         </h1>
         <h2 className="text-center text-2xl mt-5">

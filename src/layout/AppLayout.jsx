@@ -10,7 +10,7 @@ const AppLayout = () => {
         <div className="gradient"></div>
         <Outlet />
       </main>
-      <div className="text-center py-4 mt-20">
+      <div className="text-center py-4 mt-25 bg-green-700/15 py-8 text-lg">
         &copy; {new Date().getFullYear()} ResumeIq. All rights reserved.
       </div>
     </div>
