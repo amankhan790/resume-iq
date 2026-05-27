@@ -1,16 +1,84 @@
-# React + Vite
+# ResumeIQ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![ResumeIQ banner](public/banner.png)
 
-Currently, two official plugins are available:
+ResumeIQ is a resume upload and analysis app that scores your resume against a job description and stores the report for later review.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What this app does
+- Upload PDF, PNG, or JPG resumes and extract text client-side.
+- Analyze the resume against a job description using a Supabase Edge Function and Gemini.
+- Store analysis results in Supabase and display a detailed report.
+- Provide Clerk-based authentication for sign-in and user sessions.
+- Show featured resume examples on the landing page.
 
-## React Compiler
+## How it works
+1. The user signs in with Clerk and opens the upload flow.
+2. The resume is parsed with `pdfjs-dist` on the client.
+3. The app calls a Supabase Edge Function that sends the prompt to Gemini.
+4. The response is saved to the `resumes` table and shown in the report view.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
+- React 19 + Vite
+- Tailwind CSS v4 + shadcn/ui primitives
+- Clerk for auth
+- Supabase for database + Edge Functions
+- Gemini 2.5 Flash for analysis
+- pdfjs-dist for resume text extraction
 
-## Expanding the ESLint configuration
+## Routes
+- `/` Landing page
+- `/upload` Resume upload form
+- `/resume/:id` Resume report
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Environment variables
+Create a `.env` file in the project root and set:
+
+```
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+For the Supabase Edge Function, set this secret in your Supabase project:
+
+```
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+## Supabase tables
+The app expects these tables:
+
+### resumes
+- `user_id` (text)
+- `file_name` (text)
+- `resume_text` (text)
+- `job_title` (text)
+- `job_description` (text)
+- `company_name` (text)
+- `score` (number)
+- `feedback` (json)
+
+## Supabase Edge Function
+The Edge Function lives in `supabase/functions/analyze-resume` and expects:
+
+```
+{
+	"resumeText": "...",
+	"jobTitle": "...",
+	"jobDescription": "...",
+	"companyName": "..."
+}
+```
+
+It returns JSON with `score`, `summary`, `strengths`, `improvements`, and `keywords_missing`.
+
+## Getting started
+```
+npm install
+npm run dev
+```
+
+## Scripts
+- `npm run dev` Start the dev server
+- `npm run build` Build for production
+- `npm run preview` Preview the production build
